@@ -1,4 +1,4 @@
-DATA_DIR=../GREATS/data/data
+DATA_DIR=./data
 MODEL_PATH=/root/autodl-tmp/models/Llama-3.2-1B
 PERCENTAGE=0.05 # percentage of the full data to train, you can specify the training file you want to use in the script
 DATA_SEED=3

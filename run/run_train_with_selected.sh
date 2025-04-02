@@ -1,7 +1,7 @@
 TARGET_TASK_NAME="bbh"
 PERCENTAGE=0.1
 # TRAIN_FILES=../selected_data/${TARGET_TASK_NAME}/top_p${PERCENTAGE}.jsonl
-TRAIN_FILES=../GREATS/data/data/train/processed/cot/cot_data.jsonl
+TRAIN_FILES=./data/train/processed/cot/cot_data.jsonl
 MODEL_PATH=/root/autodl-tmp/models/Llama-3.2-1B
 LORA_R=128
 LORA_ALPHA=512

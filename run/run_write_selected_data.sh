@@ -1,7 +1,7 @@
 
 TARGET_TASK_NAMES="mmlu"
 TRAIN_FILE_NAMES="cot"
-TRAIN_FILES="../GREATS/data/data/train/processed/cot/cot_data.jsonl"
+TRAIN_FILES="./data/train/processed/cot/cot_data.jsonl"
 SELECTED_DATA_OUTPUT_PATH="../selected_data"
 PERCENTAGE=0.1
 
