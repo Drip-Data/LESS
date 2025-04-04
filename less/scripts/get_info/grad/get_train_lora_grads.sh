@@ -10,7 +10,7 @@ if [[ ! -d $output_path ]]; then
     mkdir -p $output_path
 fi
 
-CUDA_VISIBLE_DEVICES=1 accelerate launch --main_process_port=25901 --num_processes=1 -m less.data_selection.get_info \
+CUDA_VISIBLE_DEVICES=0,1 accelerate launch --main_process_port=25901 --num_processes=2 -m less.data_selection.get_info \
 --train_file $train_file \
 --info_type grads \
 --model_path $model \
