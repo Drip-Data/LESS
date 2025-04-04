@@ -115,13 +115,17 @@ def obtain_gradients_with_adam(model, batch, avg, avg_sq, accelerator):
     beta2 = 0.999
     eps = 1e-08
 
-    loss = model(**batch).loss
+    # loss = model(**batch).loss
     with accelerator.no_sync(model):
-        loss.backward()
+
+        # 前向传播和反向传播都要在no_sync下，否则还是会同步！！！！
+        loss = model(**batch).loss
+        accelerator.backward(loss)
 
     vectorized_grads = torch.cat(
         [p.grad.view(-1) for n, p in model.named_parameters() if p.grad is not None])
-
+    
+    # print(vectorized_grads, batch['labels'], batch['index'])
     updated_avg = beta1 * avg + (1 - beta1) * vectorized_grads
     updated_avg_sq = beta2 * avg_sq + (1 - beta2) * vectorized_grads ** 2
     vectorized_grads = updated_avg / torch.sqrt(updated_avg_sq + eps)
@@ -222,7 +226,7 @@ def collect_grads(dataloader,
     # set up a output directory for each dimension
     output_dirs = {}
     for dim in proj_dim:
-        output_dir_per_dim = os.path.join(output_dir, f"dim{dim}")
+        output_dir_per_dim = os.path.join(output_dir, 'test',f"dim{dim}/rank{accelerator.process_index}")
         output_dirs[dim] = output_dir_per_dim
         os.makedirs(output_dir_per_dim, exist_ok=True)
 
