@@ -226,7 +226,7 @@ def collect_grads(dataloader,
     # set up a output directory for each dimension
     output_dirs = {}
     for dim in proj_dim:
-        output_dir_per_dim = os.path.join(output_dir, 'test',f"dim{dim}/rank{accelerator.process_index}")
+        output_dir_per_dim = os.path.join(output_dir, f"dim{dim}/rank{accelerator.process_index}")
         output_dirs[dim] = output_dir_per_dim
         os.makedirs(output_dir_per_dim, exist_ok=True)
 
